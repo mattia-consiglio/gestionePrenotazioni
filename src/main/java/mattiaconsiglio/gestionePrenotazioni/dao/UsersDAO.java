@@ -12,4 +12,7 @@ public interface UsersDAO extends JpaRepository<User, UUID> {
     public Optional<User> findFirstByEmail(String email);
 
     public Optional<User> findFirstByUsername(String username);
+
+
+    public Optional<User> findFirstByUsernameOrEmailIgnoreCase(String username, String email);
 }

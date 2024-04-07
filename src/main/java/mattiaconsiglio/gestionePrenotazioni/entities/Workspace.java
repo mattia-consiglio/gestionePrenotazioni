@@ -14,7 +14,7 @@ import java.util.UUID;
 @Table(name = "workspaces")
 @Getter
 @Setter
-public class Workspace {
+public class Workspace implements HasId {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Setter(AccessLevel.NONE)

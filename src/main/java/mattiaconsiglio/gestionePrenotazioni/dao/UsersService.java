@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @Slf4j
 public class UsersService {
@@ -24,12 +22,12 @@ public class UsersService {
         }
     }
 
-    public User getById(UUID id) {
-        return us.findById(id).orElseThrow(() -> new RecordNotFoundException("User not found"));
-    }
-
 
     public User getByUsername(String username) {
         return us.findFirstByUsername(username).orElseThrow(() -> new RecordNotFoundException("User not found"));
+    }
+
+    public User getByUsernameOrEmail(String usernameOrEmail) {
+        return us.findFirstByUsernameOrEmailIgnoreCase(usernameOrEmail, usernameOrEmail).orElseThrow(() -> new RecordNotFoundException("User not found"));
     }
 }

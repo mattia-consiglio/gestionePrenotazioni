@@ -2,6 +2,7 @@ package mattiaconsiglio.gestionePrenotazioni;
 
 import mattiaconsiglio.gestionePrenotazioni.entities.HasId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -10,9 +11,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+@Component
 public class Utilities {
-    @Autowired
+
     private static Scanner scanner;
+
+    @Autowired
+    public Utilities(Scanner scanner) {
+        Utilities.scanner = scanner;
+    }
 
     public static <T extends HasId> T askAndVerifyList(String question, List<T> list, String elementName, boolean showList) {
         if (elementName == null) {

@@ -2,9 +2,12 @@ package mattiaconsiglio.gestionePrenotazioni.dao;
 
 import lombok.extern.slf4j.Slf4j;
 import mattiaconsiglio.gestionePrenotazioni.entities.Workspace;
+import mattiaconsiglio.gestionePrenotazioni.entities.WorkspaceType;
 import mattiaconsiglio.gestionePrenotazioni.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -28,5 +31,10 @@ public class WorkspacesService {
 
     public Workspace getByDescription(String description) {
         return ws.findFirstByDescription(description).orElseThrow(() -> new RecordNotFoundException("Workspace not found"));
+    }
+
+
+    public List<Workspace> getAllByBuildingCity(String buildingName, WorkspaceType type) {
+        return ws.findAllByCityAndType(buildingName, type);
     }
 }

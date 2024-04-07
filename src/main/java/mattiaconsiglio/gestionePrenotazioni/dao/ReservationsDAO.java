@@ -15,4 +15,6 @@ import java.util.UUID;
 public interface ReservationsDAO extends JpaRepository<Reservation, UUID> {
     @Query("SELECT r FROM Reservation r WHERE (r.date = :date AND r.user = :user) OR (r.workspace = :workspace AND r.date = :date)")
     List<Reservation> findReserved(LocalDate date, User user, Workspace workspace);
+
+    List<Reservation> findAllByUser(User user);
 }
