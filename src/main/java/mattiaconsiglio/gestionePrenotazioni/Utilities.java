@@ -50,6 +50,31 @@ public class Utilities {
         }
     }
 
+    public static String askAndVerifyStringList(String question, List<String> list) {
+
+        if (list.isEmpty()) {
+            System.err.println("No string present");
+            return null;
+        }
+        String element = null;
+        while (true) {
+            System.out.println(question);
+            list.forEach(System.out::println);
+
+            try {
+                String s = scanner.nextLine();
+                element = list.stream().filter(e -> Objects.equals(e, s)).findFirst().orElse(null);
+                if (element == null) {
+                    System.err.println("String not found");
+                } else {
+                    return element;
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Insert a valid number");
+            }
+        }
+    }
+
     public static <T extends Enum<T>> T askAndVerifyEnum(String question, Class<T> enumClass) {
         while (true) {
             System.out.println(question);

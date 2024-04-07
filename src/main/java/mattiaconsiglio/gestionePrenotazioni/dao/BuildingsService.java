@@ -6,6 +6,8 @@ import mattiaconsiglio.gestionePrenotazioni.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class BuildingsService {
@@ -24,6 +26,10 @@ public class BuildingsService {
 
     private Building findExistingBuilding(Building b) {
         return bd.findFirstByNameAndAddressAndCity(b.getName(), b.getAddress(), b.getCity()).orElseThrow(() -> new RecordNotFoundException("Building not found"));
+    }
+
+    public List<Building> getAll() {
+        return bd.findAll();
     }
 
 }

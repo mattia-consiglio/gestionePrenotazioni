@@ -17,4 +17,5 @@ public interface WorkspacesDAO extends JpaRepository<Workspace, UUID> {
 
     @Query("SELECT ws FROM Workspace ws WHERE LOWER(ws.building.city) = LOWER(:buildingName) AND ws.type =:type")
     List<Workspace> findAllByCityAndType(String buildingName, WorkspaceType type);
+    
 }

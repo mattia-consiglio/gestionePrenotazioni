@@ -40,6 +40,6 @@ class ReservationsRunner implements CommandLineRunner {
 
         us.save(new User("mconsiglio", "Mattia Consiglio", "mattia.consiglio@gmail.com"));
 
-        rs.save(new Reservation(LocalDate.now(), us.getByUsername("mconsiglio"), ws.getByDescription("Workspace 1")));
+        rs.save(new Reservation(LocalDate.now(), us.getByUsername("mconsiglio"), ws.getByDescription("Workspace 1"), 10));
     }
 }

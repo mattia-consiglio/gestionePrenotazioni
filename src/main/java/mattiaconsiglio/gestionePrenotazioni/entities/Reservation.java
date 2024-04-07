@@ -22,14 +22,18 @@ public class Reservation implements HasId {
     private UUID id;
     private LocalDate date;
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @ManyToOne
+    @JoinColumn(name = "workspace_id", nullable = false)
     private Workspace workspace;
+    private int nPeople;
 
-    public Reservation(LocalDate date, User user, Workspace workspace) {
+    public Reservation(LocalDate date, User user, Workspace workspace, int nPeople) {
         this.date = date;
         this.user = user;
         this.workspace = workspace;
+        this.nPeople = nPeople;
     }
 
     @Override
