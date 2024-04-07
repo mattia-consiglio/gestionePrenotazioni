@@ -1,21 +1,25 @@
-package team3;
+package mattiaconsiglio.gestionePrenotazioni;
 
-import team3.entities.HasId;
+import mattiaconsiglio.gestionePrenotazioni.entities.HasId;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static team3.Application.scanner;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Utilities {
+    @Autowired
+    private static Scanner scanner;
+
     public static <T extends HasId> T askAndVerifyList(String question, List<T> list, String elementName, boolean showList) {
         if (elementName == null) {
             elementName = "Element";
         }
         if (list.isEmpty()) {
-            System.err.println("Nessun/a " + elementName + " presente");
+            System.err.println("No " + elementName + " present");
             return null;
         }
         if (showList) {
@@ -26,15 +30,15 @@ public class Utilities {
             System.out.println(question);
 
             try {
-                long idElement = Long.parseLong(Application.scanner.nextLine());
-                element = list.stream().filter(e -> e.getId() == idElement).findFirst().orElse(null);
+                String idElement = scanner.nextLine();
+                element = list.stream().filter(e -> Objects.equals(e.getId().toString(), idElement)).findFirst().orElse(null);
                 if (element == null) {
-                    System.err.println(elementName + " non trovato");
+                    System.err.println(elementName + " not found");
                 } else {
                     return element;
                 }
             } catch (NumberFormatException e) {
-                System.err.println("Inserisci un numero valido");
+                System.err.println("Insert a valid number");
             }
         }
     }
@@ -50,14 +54,14 @@ public class Utilities {
                 i++;
             }
             try {
-                int output = Integer.parseInt(Application.scanner.nextLine());
+                int output = Integer.parseInt(scanner.nextLine());
                 if (integers.contains(output)) {
                     return enumClass.getEnumConstants()[output - 1];
                 } else {
-                    System.err.println("Inserisci un numero valido");
+                    System.err.println("Insert a valid number");
                 }
             } catch (NumberFormatException e) {
-                System.err.println("Inserisci un numero valido");
+                System.err.println("Insert a valid number");
             }
         }
     }
@@ -73,14 +77,14 @@ public class Utilities {
                 integers.add(j + 1);
             }
             try {
-                int output = Integer.parseInt(Application.scanner.nextLine());
+                int output = Integer.parseInt(scanner.nextLine());
                 if (integers.contains(output)) {
                     return enumClass.getEnumConstants()[output - 1];
                 } else {
-                    System.err.println("Inserisci un numero valido");
+                    System.err.println("Insert a valid number");
                 }
             } catch (NumberFormatException e) {
-                System.err.println("Inserisci un numero valido");
+                System.err.println("Insert a valid number");
             }
         }
     }
@@ -90,9 +94,9 @@ public class Utilities {
         while (true) {
             System.out.println(question);
             try {
-                return Integer.parseInt(Application.scanner.nextLine());
+                return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.err.println("Inserisci un numero valido");
+                System.err.println("Insert a valid number");
             }
         }
     }
@@ -101,14 +105,14 @@ public class Utilities {
         while (true) {
             System.out.println(question);
             try {
-                int output = Integer.parseInt(Application.scanner.nextLine());
+                int output = Integer.parseInt(scanner.nextLine());
                 if (list.contains(output)) {
                     return output;
                 } else {
-                    System.err.println("Inserisci un numero valido");
+                    System.err.println("Insert a valid number");
                 }
             } catch (NumberFormatException e) {
-                System.err.println("Inserisci un numero valido");
+                System.err.println("Insert a valid number");
             }
         }
     }
@@ -117,10 +121,10 @@ public class Utilities {
         while (true) {
             System.out.println(question);
 
-            String string = Application.scanner.nextLine();
+            String string = scanner.nextLine();
 
             if (string.isEmpty()) {
-                System.err.println("Inserisci un valore valido");
+                System.err.println("Insert a valid value");
             } else {
                 return string;
             }
@@ -131,10 +135,10 @@ public class Utilities {
         while (true) {
             System.out.println(question);
 
-            String string = Application.scanner.nextLine();
+            String string = scanner.nextLine();
 
             if (string.isEmpty() || string.length() != length) {
-                System.err.println("Inserisci un valore valido");
+                System.err.println("Insert a valid value");
             } else {
                 return string;
             }
@@ -148,12 +152,12 @@ public class Utilities {
             String string = scanner.nextLine();
 
             if (string.isEmpty()) {
-                System.err.println("Inserisci una data");
+                System.err.println("Insert a valid date");
             } else {
                 try {
                     return LocalDate.parse(string);
                 } catch (DateTimeParseException e) {
-                    System.err.println("Data non valida, riprova");
+                    System.err.println("Invalid date format, try again");
                     System.out.println();
                 }
             }
@@ -162,7 +166,7 @@ public class Utilities {
 
     public static void pressEnterToContinue() {
         System.out.println();
-        System.out.println("Premi INVIO per continuare...");
+        System.out.println("Press enter to continue");
         scanner.reset();
         scanner.nextLine();
         scanner.reset();

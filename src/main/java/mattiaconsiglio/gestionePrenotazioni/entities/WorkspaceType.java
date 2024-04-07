@@ -1,5 +1,5 @@
 package mattiaconsiglio.gestionePrenotazioni.entities;
 
 public enum WorkspaceType {
-    PIVATE, OPENSPACE, MEETING_ROOM
+    PRIVATE, OPENSPACE, CONFERENCE_ROOM, MEETING_ROOM
 }

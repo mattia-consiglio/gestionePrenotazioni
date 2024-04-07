@@ -1,2 +1,7 @@
-package mattiaconsiglio.gestionePrenotazioni.entities;public interface HasId {
+package mattiaconsiglio.gestionePrenotazioni.entities;
+
+import java.util.UUID;
+
+public interface HasId {
+    UUID getId();
 }
